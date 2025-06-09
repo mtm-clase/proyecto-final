@@ -1,0 +1,40 @@
+services:
+  backend:
+    build:
+      context: ./express_backend
+    networks:
+      - "api"
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./express_backend:/app
+    environment:
+      - PROXMOX_API_URL=http://proxmox_backend:8000
+
+  frontend:
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    networks:
+      - "api"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - VITE_API_URL=http://backend:3001
+
+  proxmox_backend:
+    build:
+      context: ./proxmox_api
+    restart: unless-stopped
+    volumes:
+      - ./proxmox_api:/code/app
+    networks:
+      - "api"
+    ports:
+      - "8000:8000"
+
+networks:
+  api: 

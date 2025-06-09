@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: ./express_backend
+    networks:
+      - "api"
+    restart: unless-stopped
+    environment:
+      - PROXMOX_API_URL=http://proxmox_backend:8000
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.serve
+    restart: unless-stopped
+    networks:
+      - api
+    ports:
+      - "1030:80"  # Serving built static files via NGINX on port 80
+    environment:
+      - BACKEND_URL=http://backend
+      
+  proxmox_backend:
+    build:
+      context: ./proxmox_api
+    restart: unless-stopped
+    networks:
+      - "api"
+
+networks:
+  api: 

@@ -1,0 +1,447 @@
+\documentclass[11pt,oneside,a4paper]{book}
+\usepackage[%
+  a4paper,%
+  left = 20mm,%
+  right = 20mm,%
+  textwidth = 178mm,%
+  top = 40mm,%
+  bottom = 30mm,%
+  %heightrounded,%
+  headheight=70pt,%
+  headsep=25pt,%
+]{geometry}
+\usepackage{graphicx}
+%\usepackage[sfdefault,light]{Helvetica}
+\usepackage[sfdefault,light]{FiraSans}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    allcolors  = link-blue, 
+}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{color,colortbl}
+\usepackage{longtable} % Paquete para tablas largas
+\usepackage{colortbl}  % Colores en tablas
+\usepackage[table,xcdraw]{xcolor} % Colores adicionales
+
+
+\definecolor{link-blue}{RGB}{6,69,173}
+\definecolor{dark-green}{RGB}{52,133,62}
+\definecolor{light-blue}{RGB}{127,180,240}
+\definecolor{dark-blue}{RGB}{72,120,224}
+\definecolor{heading-grey}{RGB}{128,128,128}
+\definecolor{heading2-grey}{RGB}{200,200,200}
+\definecolor{Critical}{RGB}{192,0,0}
+\definecolor{High}{RGB}{255,0,0}
+\definecolor{Medium}{RGB}{255,192,0}
+\definecolor{Low}{RGB}{255,255,0}
+\definecolor{Informational}{RGB}{94,185,255}
+
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{array,booktabs}
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.2pt}
+\renewcommand{\headrulewidth}{0.2pt}
+\fancyfoot{}
+\fancyhead{}
+\fancyfoot[C]{Confidential}
+\fancypagestyle{plain}{
+    \fancyfoot[R]{\\ \textcolor{heading-grey}{\newline Página \thepage\ de \pageref{LastPage}}}
+    \fancyfoot[C]{\textcolor{heading-grey}{\textbf{Proyecto de Fin de Ciclo -- \projectno}  }}
+    \fancyhead[R]{\includegraphics[width=1cm]{img/logo.jpg}}
+}
+\fancypagestyle{fancy}{
+    \fancyfoot[R]{\\ \textcolor{heading-grey}{\newline Página \thepage\ de \pageref{LastPage}}}
+    \fancyfoot[C]{\textcolor{heading-grey}{\textbf{Proyecto de Fin de Ciclo -- \projectno}   }}
+    \fancyhead{}
+}
+\thispagestyle{fancy}\pagestyle{plain}
+
+\newcommand{\email}[1]{\href{mailto://#1}{#1}}
+\newcommand{\newchapter}[1]{{\section*{#1}
+\addcontentsline{toc}{chapter}{#1}}}
+\newcommand{\newsection}[1]{{\subsection*{#1}
+\addcontentsline{toc}{section}{#1}}}
+\newcommand{\newsubsection}[1]{{\subsubsection*{#1}
+\addcontentsline{toc}{subsection}{#1}}}
+\usepackage[skip=10pt plus1pt, indent=0pt]{parskip}
+\usepackage{float} % Añadir al preámbulo si no lo tienes
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatletter
+\renewcommand\tableofcontents{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \section*{\contentsname
+        \@mkboth{%
+           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
+\makeatother
+
+
+\titleformat{\section}
+{\normalfont\huge\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\Large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+{\normalfont\large\bfseries}{\thesubsubsection}{1em}{}
+
+% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
+% \titlespacing{command}{left spacing}{before spacing}{after spacing}[right]
+
+\titlespacing{\section}{0pt}{1em}{0.5em}
+\titlespacing{\subsection}{0pt}{0em}{0.25em}
+
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+
+\def\projectno{Cloud Privado Dinámico}
+
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%          Begin title page           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+   \thispagestyle{fancy}
+   \begin{center}
+        \vspace*{8em}
+   
+        \centering\includegraphics[width=13cm]{img/logo_iescierva.jpg}
+
+        \vspace{3em}
+
+        \huge{\textbf{Proyecto Final de Ciclo \\
+        Cloud Privado Dinámico}}
+
+        \vspace{8em}
+
+        \Large{Moisés Tamaalit Martínez\\
+        2º Administración de Sistemas Informáticos en Red}
+
+        \vspace{4em}
+
+        \normalsize{
+            IES Ingeniero de la Cierva\\
+            Curso 2024/2025
+        }
+
+   \end{center}
+
+    \vspace{2em}
+    \normalsize{
+        Fecha: \today \\
+        Proyecto: \projectno \\
+        Versión 1.0
+    }
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%           Begin contents            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newchapter{Información de contacto}
+
+\begin{table}[h]
+\begin{center}
+    \begin{tabular}{|m{5cm}|m{3cm}|m{7.5cm}|} % Anchos ajustados aquí
+        \hline
+        \rowcolor{heading-grey}\multicolumn{1}{|>{\centering\arraybackslash}m{5cm}|}{\textcolor{white}{\textbf{Nombre}}} & 
+        \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{\textcolor{white}{\textbf{Título}}} & 
+        \multicolumn{1}{>{\centering\arraybackslash}m{7.5cm}|}{\textcolor{white}{\textbf{Contacto}}} \\ \hline
+        Moisés Tamaalit Martínez & Alumno & Email: \href{mailto:moisestamaalit@gmail.com}{moisestamaalit@gmail.com} \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+
+\newpage
+
+\newchapter{Resumen}
+Este proyecto presenta el desarrollo de una plataforma de \textit{hosting} VPS que permite desplegar y gestionar servidores virtuales de forma automatizada. La solución implementa una arquitectura de microservicios moderna, usando React, Node.js y Python, ofreciendo una interfaz intuitiva para usuarios sin conocimientos técnicos avanzados.
+
+Los objetivos principales incluyen la automatización del despliegue de VPS, monitorización en tiempo real y gestión simplificada de servidores. Los resultados demuestran una plataforma funcional que cumple estos objetivos, proporcionando una solución segura y escalable.
+
+\newpage
+
+\newchapter{Introducción}
+
+\newsection{Contextualización}
+En la actualidad, la demanda de servidores virtuales privados (VPS) ha aumentado significativamente debido a la creciente necesidad de infraestructura \textit{cloud} flexible y escalable. Las empresas y desarrolladores buscan soluciones que les permitan desplegar y gestionar recursos de forma eficiente.
+
+\newsection{Justificación}
+La elección de este proyecto se basa en:
+\begin{itemize}
+    \item Experiencia previa en administración de sistemas
+    \item Interés en tecnologías de virtualización
+    \item Identificación de la necesidad de soluciones más accesibles
+    \item Oportunidad de aplicar conocimientos del ciclo formativo
+\end{itemize}
+
+
+\newsection{Objetivos del Proyecto}
+\textbf{Principales:}
+\begin{itemize}
+    \item Desarrollar una plataforma completa de gestión de VPS
+    \item Automatizar el despliegue de servidores virtuales
+    \item Implementar monitorización en tiempo real
+\end{itemize}
+
+\textbf{Secundarios:}
+\begin{itemize}
+    \item Crear una interfaz de usuario intuitiva
+    \item Optimizar el rendimiento del sistema
+    \item Documentar el proceso de desarrollo
+\end{itemize}
+\newpage
+\newsection{Alcance}
+\textbf{El proyecto incluye:}
+\begin{itemize}
+    \item Sistema de gestión de usuarios
+    \item Panel de control de VPS
+    \item Monitorización básica de recursos
+    \item Automatización de despliegues
+\end{itemize}
+
+\textbf{No incluye:}
+\begin{itemize}
+    \item Sistema de facturación
+    \item Soporte para múltiples centros de datos
+    \item Backup automático de VPS
+    \item Sistema de tickets de soporte
+\end{itemize}
+
+\newpage
+
+\newchapter{Análisis previo}
+\newsection{Necesidades detectadas}
+El mercado actual de \textit{hosting} VPS presenta una barrera significativa para usuarios sin experiencia técnica avanzada. Los paneles de control existentes suelen ser complejos y poco intuitivos, dificultando la gestión de servidores virtuales. Además, la automatización del despliegue y configuración de VPS es limitada, requiriendo frecuentemente intervención manual.
+
+\newsection{Requisitos técnicos y funcionales}
+Los requisitos técnicos incluyen un servidor Proxmox VE como base de virtualización, mínimo 32GB de RAM y procesador con soporte para virtualización (Intel VT-x o AMD SVM). 
+
+La plataforma debe soportar múltiples usuarios concurrentes y garantizar el aislamiento de recursos. 
+
+Funcionalmente, se requiere una interfaz web amigable con el usuario, sistema de autenticación seguro, panel de control intuitivo y monitorización en tiempo real de recursos.
+
+\newsection{Herramientas y tecnologías}
+La implementación se basa en React con TypeScript para el \textit{frontend}, proporcionando una experiencia de usuario moderna y \textit{responsive}. El \textit{backend} utiliza Node.js con Express para la API principal, mientras que Python con FastAPI gestiona la interacción con Proxmox. MariaDB sirve como base de datos relacional, y Docker facilita la contenerización de servicios. Proxmox VE actúa como hipervisor base.
+
+\newsection{Estudio de viabilidad}
+El análisis de viabilidad indica que el proyecto es técnicamente factible con los recursos disponibles. Los costes se limitan principalmente al hardware necesario para el servidor Proxmox en este entorno. 
+
+En un entorno de producción, hay que sumarle el coste de un bloque de IPs, los dominios que fueran a usarse y el mantenimiento del servidor. 
+
+El tiempo estimado de desarrollo es de 4 meses, considerando las fases de diseño, implementación y pruebas. 
+
+Los riesgos principales incluyen la complejidad de la integración con Proxmox y la necesidad de optimizar el rendimiento del sistema.
+
+\newpage
+
+\newchapter{Metodología}
+
+\newsection{Frontend (React + TypeScript)}
+Para el desarrollo del frontend se ha utilizado \textbf{React 19} con \textbf{TypeScript}, lo que permite crear una interfaz de usuario moderna y escalable. 
+
+La ventaja de usar React es su capacidad para construir componentes reutilizables y su ecosistema robusto. TypeScript añade tipado estático, mejorando la mantenibilidad del código y reduciendo errores en tiempo de ejecución.
+
+Se ha implementado \textbf{Tailwind CSS } para estilos y \textbf{Shadcn/ui} para componentes reutilizables. La navegación se gestiona con React Router y la autenticación se realiza mediante JWT.
+
+Para desarrollar la interfaz web, dado que soy un administrador de sistemas y no un desarrollador web \textit{frontend}, he utilizado componentes predefinidos de Shadcn/ui, que proporcionan una base sólida y estilizada para la interfaz. Esto permite centrarme en la lógica de negocio y la integración con el \textit{backend} sin preocuparme por el diseño desde cero. Me he apoyado en desarrollo con modelos de inteligencia artificial para generar código y mejorar la eficiencia del desarrollo, como \textbf{Claude Sonnet 3.5} o \textbf{ChatGPT 4} usando GitHub Copilot.
+
+\newsection{Backend (Node.js + Express)}
+Para el desarrollo del \textit{backend} se ha utilizado \textbf{Node.js} con \textbf{Express}, lo que permite crear una API RESTful eficiente y escalable. Node.js es ideal para aplicaciones en tiempo real y Express facilita la creación de rutas y middleware.
+
+\newsection{API Proxmox (Python + FastAPI)}
+Para interactuar con el hipervisor, decidí hacer una API separada de la principal, utilizando \textbf{Python} con \textbf{FastAPI}. Esta elección se basa en securizar la interacción con el hipervisor, aprovechando la facilidad de uso de FastAPI para crear APIs RESTful y su excelente rendimiento. Además, Proxmox proporciona una API REST que se integra bien con FastAPI.
+
+\newsection{Base de Datos (MariaDB)}
+Escogí este sistema gestor de bases de datos (SGBD) por mi experiencia con este.
+
+\newsection{Contenedorización}
+Para el despliegue de la aplicación me decidí por usar contenedores Docker, lo que permite una fácil portabilidad y escalabilidad. Cada componente del sistema (frontend, backend, API Proxmox) se ejecuta en su propio contenedor, facilitando la gestión y el despliegue en diferentes entornos.
+
+Me he apoyado con Docker Compose para orquestar los contenedores, definiendo servicios y redes necesarios para la aplicación. Esto permite un despliegue sencillo y reproducible en cualquier entorno compatible con Docker.
+
+\newpage
+
+\newchapter{Arquitectura del Sistema}
+
+\newsection{Visión General}
+El sistema se compone de varios componentes independientes que trabajan juntos:
+
+\begin{itemize}
+    \item Docker para contenerización
+    \subitem Frontend web desarrollado con React y TypeScript
+    \subitem Backend API en Node.js con Express
+    \subitem API de Proxmox en Python con FastAPI
+    \item Base de datos MariaDB
+    \item Sistema de virtualización Proxmox VE
+\end{itemize}
+
+\newsection{Componentes}
+
+\newsubsection{Frontend}
+Desarrollado con React 19 y TypeScript, utiliza:
+\begin{itemize}
+    \item Tailwind CSS para estilos
+    \item Shadcn/ui para componentes de interfaz
+    \item React Router para navegación
+    \item JWT para autenticación
+\end{itemize}
+
+\newsubsection{Backend API}
+Implementado en Node.js con Express:
+\begin{itemize}
+    \item Express para el servidor web
+    \item JWT para autenticación
+    \item MariaDB para persistencia de datos
+    \item Bcrypt para hash de contraseñas
+\end{itemize}
+
+\newsubsection{API de Proxmox}
+Desarrollada en Python con FastAPI:
+\begin{itemize}
+    \item FastAPI para la API REST
+    \item Proxmox API Client para interacción con Proxmox
+    \item Pydantic para validación de datos
+\end{itemize}
+
+\newpage
+
+\newchapter{Desarrollo del Proyecto}
+
+\newsection{Implementación Frontend}
+Descripción detallada del desarrollo frontend, incluyendo:
+\begin{itemize}
+    \item Estructura de componentes
+    \item Sistema de autenticación
+    \item Panel de control
+    \item Monitorización
+\end{itemize}
+
+\newsection{Fase 3: Implementación Backend}
+Desarrollo del servidor Express, incluyendo:
+\begin{itemize}
+    \item Sistema de rutas
+    \item Middleware de autenticación
+    \item Integración con base de datos
+    \item API RESTful
+\end{itemize}
+
+\newsection{Fase 4: API Proxmox}
+Implementación de la API de Proxmox:
+\begin{itemize}
+    \item Endpoints principales
+    \item Sistema de plantillas
+    \item Gestión de recursos
+    \item Monitorización
+\end{itemize}
+
+\newpage
+
+\newchapter{Resultados}
+
+\newsection{Funcionalidades Implementadas}
+\begin{itemize}
+    \item Gestión de VPS
+    \item Sistema de usuarios
+    \item Monitorización
+    \item Automatización
+\end{itemize}
+
+\newsection{Evaluación de Objetivos}
+Análisis del cumplimiento de objetivos:
+\begin{itemize}
+    \item Funcionalidad
+    \item Rendimiento
+    \item Seguridad
+    \item Usabilidad
+\end{itemize}
+
+\newpage
+
+\newchapter{Seguridad}
+
+\newsection{Autenticación y Autorización}
+\begin{itemize}
+    \item JWT para tokens de sesión
+    \item Contraseñas hasheadas con bcrypt
+    \item Validación de datos en endpoints
+    \item CORS configurado por seguridad
+\end{itemize}
+
+\newsection{Seguridad en VPS}
+\begin{itemize}
+    \item Aislamiento de recursos
+    \item Redes virtuales privadas
+    \item Firewall configurado por defecto
+    \item Actualización automática de plantillas
+\end{itemize}
+
+\newpage
+
+\newchapter{Conclusiones y Trabajo Futuro}
+
+\newsection{Objetivos Alcanzados}
+\begin{itemize}
+    \item Plataforma funcional de gestión de VPS
+    \item Sistema de autenticación seguro
+    \item Despliegue automatizado de servidores
+    \item Monitorización en tiempo real
+    \item Interfaz de usuario intuitiva
+\end{itemize}
+
+\newsection{Trabajo Futuro}
+\begin{itemize}
+    \item Sistema de copias de seguridad
+    \item Métricas avanzadas
+    \item Soporte para múltiples hipervisores
+    \item API pública para integraciones
+    \item Panel de administración avanzado
+\end{itemize}
+
+\newpage
+
+\newchapter{Bibliografía}
+\begin{itemize}
+    \item Documentación oficial de React: https://reactjs.org/
+    \item Documentación de FastAPI: https://fastapi.tiangolo.com/
+    \item Documentación de Proxmox: https://pve.proxmox.com/wiki/
+        \subitem - Documentación de la API de Proxmox: https://pve.proxmox.com/pve-docs/api-viewer/
+    \item Documentación de Express: https://expressjs.com/
+    \item Documentación de MariaDB: https://mariadb.org/documentation/
+    \item Documentación de shadcn/ui: https://ui.shadcn.com/
+    \item Documentación de Tailwind CSS: https://tailwindcss.com/docs
+    \item Documentación de Docker: https://docs.docker.com/
+\end{itemize}
+
+\end{document}
