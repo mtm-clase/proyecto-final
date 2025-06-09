@@ -1,24 +1,29 @@
 # Diagramas de Flujo del Sistema
 
 ## Frontend (React + TypeScript)
+
 ```mermaid
 graph TD
-    A[Usuario] --> B[Login/Registro]
-    B --> |Token JWT| C[Dashboard]
-    C --> D[Panel VPS]
-    C --> E[Panel Perfiles]
-    D --> F[Listar VPS]
-    D --> G[Crear VPS]
-    D --> H[Gestionar VPS]
-    H --> I[Iniciar/Detener]
-    H --> J[Monitorizar]
-    H --> K[Ver Credenciales]
-    E --> L[Ver Perfil]
-    E --> M[Editar Perfil]
-    E --> N[Gestionar Créditos]
+A[Usuario] --> B[Login/Registro]
+B --> |Token JWT| C[Dashboard]
+B --> |Token JWT| P[Página Principal]
+P --> Q[Ver Planes]
+Q --> R[Seleccionar Plan]
+R --> S[Adquirir VPS]
+S --> |Créditos Suficientes| T[Crear VPS]
+S --> |Créditos Insuficientes| U[Error]
+T --> C
+C --> D[Panel VPS]
+C --> E[Panel Perfiles]
+D --> F[Listar VPS]
+D --> H[Gestionar VPS]
+H --> I[Iniciar/Detener]
+H --> J[Monitorizar]
+H --> K[Ver Credenciales]
+E --> L[Ver Perfil]
+E --> M[Editar Perfil]
+E --> N[Gestionar Créditos]
 ```
-
-
 
 ## Backend (Node.js + Express)
 
