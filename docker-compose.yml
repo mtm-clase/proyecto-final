@@ -7,6 +7,9 @@ services:
     restart: unless-stopped
     environment:
       - PROXMOX_API_URL=http://proxmox_backend:8000
+      - DB_HOST=192.168.148.1
+      - DB_USER=vps_web
+      - DB_PASSWORD=
 
   frontend:
     build:
@@ -24,6 +27,9 @@ services:
     build:
       context: ./proxmox_api
     restart: unless-stopped
+    environment:
+      - UBUNTU_TEMPLATE_VMID=9000
+      - ALMA_TEMPLATE_VMID=9001
     networks:
       - "api"
 
