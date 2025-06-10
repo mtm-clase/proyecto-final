@@ -1,0 +1,10 @@
+#cloud-config
+runcmd:
+  - apt update
+  - apt install -y qemu-guest-agent
+  - systemctl enable --now qemu-guest-agent
+  - touch /etc/cloud/cloud-init.disabled
+  - rm /etc/ssh/sshd_config.d/*
+  - reboot
+ssh_pwauth: True ## This line enables ssh password authentication
+package_upgrade: true

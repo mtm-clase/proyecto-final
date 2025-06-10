@@ -1,0 +1,7 @@
+#cloud-config
+packages:
+  - qemu-guest-agent
+package_upgrade: true
+runcmd:
+  - touch /etc/cloud/cloud-init.disabled
+  - reboot
