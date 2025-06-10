@@ -1,0 +1,316 @@
+\documentclass[11pt,oneside,a4paper]{book}
+\usepackage[%
+  a4paper,%
+  left = 20mm,%
+  right = 20mm,%
+  textwidth = 178mm,%
+  top = 40mm,%
+  bottom = 30mm,%
+  %heightrounded,%
+  headheight=70pt,%
+  headsep=25pt,%
+]{geometry}
+\usepackage{graphicx}
+%\usepackage[sfdefault,light]{Helvetica}
+\usepackage[sfdefault,light]{FiraSans}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    allcolors  = link-blue, 
+}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{color,colortbl}
+\usepackage{longtable} % Paquete para tablas largas
+\usepackage{colortbl}  % Colores en tablas
+\usepackage[table,xcdraw]{xcolor} % Colores adicionales
+
+
+\definecolor{link-blue}{RGB}{6,69,173}
+\definecolor{dark-green}{RGB}{52,133,62}
+\definecolor{light-blue}{RGB}{127,180,240}
+\definecolor{dark-blue}{RGB}{72,120,224}
+\definecolor{heading-grey}{RGB}{128,128,128}
+\definecolor{heading2-grey}{RGB}{200,200,200}
+\definecolor{Critical}{RGB}{192,0,0}
+\definecolor{High}{RGB}{255,0,0}
+\definecolor{Medium}{RGB}{255,192,0}
+\definecolor{Low}{RGB}{255,255,0}
+\definecolor{Informational}{RGB}{94,185,255}
+
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{array,booktabs}
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.2pt}
+\renewcommand{\headrulewidth}{0.2pt}
+\fancyfoot{}
+\fancyhead{}
+\fancyfoot[C]{Confidential}
+\fancypagestyle{plain}{
+    \fancyfoot[R]{\\ \textcolor{heading-grey}{\newline Página \thepage\ de \pageref{LastPage}}}
+    \fancyfoot[C]{\textcolor{heading-grey}{\textbf{Proyecto de Fin de Ciclo -- \projectno}  }}
+    \fancyhead[R]{\includegraphics[width=1cm]{img/logo.jpg}}
+}
+\fancypagestyle{fancy}{
+    \fancyfoot[R]{\\ \textcolor{heading-grey}{\newline Página \thepage\ de \pageref{LastPage}}}
+    \fancyfoot[C]{\textcolor{heading-grey}{\textbf{Proyecto de Fin de Ciclo -- \projectno}   }}
+    \fancyhead{}
+}
+\thispagestyle{fancy}\pagestyle{plain}
+
+\newcommand{\email}[1]{\href{mailto://#1}{#1}}
+\newcommand{\newchapter}[1]{{\section*{#1}
+\addcontentsline{toc}{chapter}{#1}}}
+\newcommand{\newsection}[1]{{\subsection*{#1}
+\addcontentsline{toc}{section}{#1}}}
+\newcommand{\newsubsection}[1]{{\subsubsection*{#1}
+\addcontentsline{toc}{subsection}{#1}}}
+\usepackage[skip=10pt plus1pt, indent=0pt]{parskip}
+\usepackage{float} % Añadir al preámbulo si no lo tienes
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatletter
+\renewcommand\tableofcontents{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \section*{\contentsname
+        \@mkboth{%
+           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
+\makeatother
+
+
+\titleformat{\section}
+{\normalfont\huge\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\Large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+{\normalfont\large\bfseries}{\thesubsubsection}{1em}{}
+
+% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
+% \titlespacing{command}{left spacing}{before spacing}{after spacing}[right]
+
+\titlespacing{\section}{0pt}{1em}{0.5em}
+\titlespacing{\subsection}{0pt}{0em}{0.25em}
+
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+
+\def\projectno{Cloud Privado Dinámico - Anexo A}
+
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\blankpage}{
+  \clearpage
+  \begingroup
+  \pagestyle{empty}
+  \null
+  \vfill
+  \newpage
+  \addtocounter{page}{-1} % ¡esto es clave!
+  \endgroup
+}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%          Begin title page           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+   \thispagestyle{fancy}
+   \begin{center}
+        \vspace*{8em}
+   
+        \centering\includegraphics[width=13cm]{img/logo_iescierva.jpg}
+
+        \vspace{3em}
+
+        \huge{\textbf{Proyecto Final de Ciclo \\
+        Cloud Privado Dinámico\\
+        Anexo A: Código fuente}}
+
+        \vspace{8em}
+
+        \Large{Moisés Tamaalit Martínez\\
+        2º Administración de Sistemas Informáticos en Red}
+
+        \vspace{4em}
+
+        \normalsize{
+            IES Ingeniero de la Cierva\\
+            Curso 2024/2025
+        }
+
+   \end{center}
+\end{titlepage}
+
+\blankpage
+
+\newpage
+
+\tableofcontents
+\blankpage
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%           Begin contents            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newchapter{Información de contacto}
+
+\begin{table}[h]
+\begin{center}
+    \begin{tabular}{|m{5cm}|m{3cm}|m{7.5cm}|} % Anchos ajustados aquí
+        \hline
+        \rowcolor{heading-grey}\multicolumn{1}{|>{\centering\arraybackslash}m{5cm}|}{\textcolor{white}{\textbf{Nombre}}} & 
+        \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{\textcolor{white}{\textbf{Título}}} & 
+        \multicolumn{1}{>{\centering\arraybackslash}m{7.5cm}|}{\textcolor{white}{\textbf{Contacto}}} \\ \hline
+        Moisés Tamaalit Martínez & Alumno & Email: \href{mailto:moisestamaalit@gmail.com}{moisestamaalit@gmail.com} \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+
+\newpage
+
+\newchapter{Resumen}
+Este anexo sirve para adjuntar el código fuente del proyecto de fin de ciclo Cloud Privado Dinámico, que consiste en una plataforma para gestionar servidores virtuales privados (VPS) de forma automatizada y segura. El proyecto se ha desarrollado utilizando tecnologías modernas como React, Node.js, Express, FastAPI y Docker, con el objetivo de facilitar la gestión de VPS a usuarios sin experiencia técnica avanzada.
+
+Alternativamente, se puede acceder al código fuente del proyecto en el repositorio de GitHub: \url{https://github.com/mtm-clase/proyecto-final}.
+
+\newpage
+\blankpage
+
+\newchapter{Scripts de Proxmox}
+
+En el hipervisor se han creado varios scripts para crear la imagen de AlmaLinux y Ubuntu sobre la que se clona para crear los VPS. Además, ha habido que crear snippets para cloud-init, ya que la imagen de Ubuntu no viene con \texttt{qemu-guest-agent} por defecto y bloquea el login con contraseña por SSH.
+
+\newsection{Creación de imágenes}
+\texttt{ubuntu.sh}:
+\begin{verbatim}
+    #!/bin/bash
+
+    # Variables
+    IMAGE_URL="https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
+    # Type the max number of cores of the hypervisor (to add CPU hotplug support)
+    NODE_MAX_CORES=16 
+    VM_CORES="1"
+    IMAGE_NAME="ubuntu-cloud.img"
+    STORAGE_POOL="local-lvm"
+    VM_ID="9000"
+    VM_NAME="ubuntu-cloud-template"
+    BRIDGE="INTERNA1"  # Change to your network bridge
+
+    # Download the latest Ubuntu Cloud image
+    echo "Downloading latest Ubuntu Cloud Image..."
+    wget -O "$IMAGE_NAME" "$IMAGE_URL"
+
+    # Create a new VM in Proxmox
+    echo "Creating VM $VM_ID..."
+    qm create "$VM_ID" --name "$VM_NAME" --cpu host --cores "$NODE_MAX_CORES" --machine q35 
+        --numa 1 --vcpus "$VM_CORES" --memory 2048 --net0 virtio,bridge="$BRIDGE"
+    qm set "$VM_ID" --scsihw virtio-scsi-pci --scsi0 
+        "$STORAGE_POOL:0,import-from=$PWD/$IMAGE_NAME"
+    qm set "$VM_ID" --boot order=scsi0
+    qm set "$VM_ID" --ide2 "$STORAGE_POOL:cloudinit"
+    qm set "$VM_ID" --cicustom "vendor=local:snippets/vendor-ubuntu.yml"
+    qm set "$VM_ID" --ciuser "mtm" # Test
+    qm set "$VM_ID" --cipassword "pepe" # Testing
+    qm set "$VM_ID" --ipconfig0 ip=dhcp
+    qm set "$VM_ID" --agent 1
+    qm template "$VM_ID"
+
+    echo "Ubuntu Cloud Image template creation completed."
+\end{verbatim}
+
+\newpage
+\blankpage
+
+\texttt{almalinux.sh}:
+\begin{verbatim}
+    #!/bin/bash
+
+    # Variables
+    IMAGE_URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images
+    /AlmaLinux-9-GenericCloud-latest.x86_64.qcow2"
+    # Type the max number of cores of the hypervisor (to add CPU hotplug support)
+    NODE_MAX_CORES=16
+    VM_CORES="1"
+    IMAGE_NAME="almalinux-cloud.qcow2"
+    STORAGE_POOL="local-lvm"
+    VM_ID="9001"
+    VM_NAME="alma-cloud-template"
+    BRIDGE="INTERNA1"  # Change to your network bridge
+
+    # Download the latest AlmaLinux Cloud image
+    echo "Downloading latest AlmaLinux Cloud Image..."
+    wget -O "$IMAGE_NAME" "$IMAGE_URL"
+
+    # Create a new VM in Proxmox
+    echo "Creating VM $VM_ID..."
+    qm create "$VM_ID" --name "$VM_NAME" --cpu host --cores "$NODE_MAX_CORES" --machine q35 
+        --numa 1 --vcpus "$VM_CORES" --memory 2048 --net0 virtio,bridge="$BRIDGE"
+    qm set "$VM_ID" --scsihw virtio-scsi-pci --scsi0 
+        "$STORAGE_POOL:0,import-from=$PWD/$IMAGE_NAME"
+    qm set "$VM_ID" --boot order=scsi0
+    qm set "$VM_ID" --ide2 "$STORAGE_POOL:cloudinit"
+    qm set "$VM_ID" --cicustom "vendor=local:snippets/vendor-alma.yml"
+    qm set "$VM_ID" --ciuser "mtm" # Testing
+    qm set "$VM_ID" --cipassword "pepe" # Testing
+    qm set "$VM_ID" --ipconfig0 ip=dhcp
+    qm set "$VM_ID" --agent 1
+    qm template "$VM_ID"
+
+    echo "AlmaLinux Cloud Image template creation completed."
+\end{verbatim}
+
+\newpage
+\blankpage
+
+\newsection{Snippets para configurar la VM}
+\texttt{vendor-ubuntu.yml}:
+\begin{verbatim}
+    #cloud-config
+    runcmd:
+    - apt update
+    - apt install -y qemu-guest-agent
+    - systemctl enable --now qemu-guest-agent
+    - touch /etc/cloud/cloud-init.disabled
+    - rm /etc/ssh/sshd_config.d/*
+    - reboot
+    ssh_pwauth: True
+    package_upgrade: true
+\end{verbatim}
+\texttt{vendor-alma.yml}:
+\begin{verbatim}
+    #cloud-config
+    runcmd:
+    - touch /etc/cloud/cloud-init.disabled
+    - rm /etc/ssh/sshd_config.d/*
+    - reboot
+    ssh_pwauth: True
+    package_upgrade: true
+\end{verbatim}
+
+
+\end{document}
