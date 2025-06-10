@@ -1,0 +1,40 @@
+services:
+  backend:
+    build:
+      context: ./express_backend
+    networks:
+      - "api"
+    restart: unless-stopped
+    environment:
+      PROXMOX_API_URL: http://proxmox_backend:8000
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.serve
+    restart: unless-stopped
+    networks:
+      - api
+    ports:
+      - "1030:80"  # Serving built static files via NGINX on port 80
+    environment:
+      - BACKEND_URL=http://backend
+      
+  proxmox_backend:
+    build:
+      context: ./proxmox-api
+    restart: unless-stopped
+    environment:
+      PROXMOX_IP: ${PROXMOX_IP}
+      PROXMOX_API_USER: ${PROXMOX_API_USER}
+      PROXMOX_API_KEY: ${PROXMOX_API_KEY} # Llama al token "API"
+      UBUNTU_TEMPLATE_VMID: 9000
+      ALMA_TEMPLATE_VMID: 9001
+    networks:
+      - "api"
+
+networks:
+  api: 
